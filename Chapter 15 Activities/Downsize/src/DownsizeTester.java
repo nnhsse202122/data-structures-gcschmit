@@ -12,10 +12,11 @@ public class DownsizeTester
         employeeNames.addLast("Harry");
         employeeNames.addLast("Romeo");
         employeeNames.addLast("Tom");
+        employeeNames.addLast("Juliet");
 
         Business.downsize(employeeNames, 2);
 
         System.out.println(employeeNames);
-        System.out.println("Expected: [Dick, Romeo]");
+        System.out.println("Expected: [Dick, Romeo, Juliet]");
     }
 }
