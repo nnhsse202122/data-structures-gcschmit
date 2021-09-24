@@ -10,5 +10,19 @@ public class PriorityQueueDemo
 {
     public static void main(String[] args)
     {
+        // create a priority queue of to-do items
+        Queue<WorkOrder> q = new PriorityQueue<>();
+
+        q.add(new WorkOrder(3, "vaccum"));
+        q.add(new WorkOrder(2, "water plants"));
+        q.add(new WorkOrder(2, "make dinner"));
+        q.add(new WorkOrder(2, "walk dog"));
+        q.add(new WorkOrder(9, "play video games"));
+        q.add(new WorkOrder(1, "take Chapter 15 pratice quiz"));
+
+        while(q.size() > 0)
+        {
+            System.out.println(q.remove());
+        }
     }
 }
