@@ -1,5 +1,7 @@
 import java.util.NoSuchElementException;
 
+import javax.lang.model.util.ElementScanner6;
+
 /**
  * A linked list is a sequence of nodes with efficient
  * element insertion and removal. This class
@@ -114,47 +116,97 @@ public class LinkedList
                 throw new NoSuchElementException();
             }
 
-            
+            previous = position; // remember the node for remove
+            isAfterNext = true;
+
+            if(position == null)
+            {
+                position = first;
+            }
+            else
+            {
+                position = position.next;
+            }
+
+            return position.data;
         }
-
-
-
 
         /**
             Tests if there is an element after the iterator position.
             @return true if there is an element after the iterator position
         */
-
+        public boolean hasNext()
+        {
+            if(position == null)
+            {
+                return first != null;
+            }
+            else
+            {
+                return position.next != null;
+            }
+        }
 
         /**
             Adds an element before the iterator position
             and moves the iterator past the inserted element.
             @param element the element to add
         */
+        public void add(Object element)
+        {
+            if(position == null)
+            {
+                addFirst(element);
+                position = first;
+            }
+            else
+            {
+                Node newNode = new Node();
+                newNode.data = element;
+                newNode.next = position.next;
+                position.next = newNode;
+                position = newNode;
+            }
 
-
-
-
-
+            isAfterNext = false;
+        }
 
         /**
             Removes the last traversed element. This method may
             only be called after a call to the next() method.
         */
+        public void remove()
+        {
+            if(!isAfterNext)
+            {
+                throw new IllegalStateException();
+            }
 
+            if(position == first)
+            {
+                removeFirst();
+            }
+            else
+            {
+                previous.next = position.next;
+            }
 
-
-
-
-
+            position = previous;
+            isAfterNext = false;
+        }
 
         /**
             Sets the last traversed element to a different value.
             @param element the element to set
         */
+        public void set(Object element)
+        {
+            if(!isAfterNext)
+            {
+                throw new IllegalStateException();
+            }
 
-
-
-
+            position.data = element;
+        }
     }//LinkedListIterator
 }//LinkedList
