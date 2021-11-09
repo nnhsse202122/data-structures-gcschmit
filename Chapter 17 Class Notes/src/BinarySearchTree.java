@@ -1,3 +1,5 @@
+import javax.lang.model.util.ElementScanner6;
+
 /**
     This class implements a binary search tree whose
     nodes hold objects that implement the Comparable
@@ -12,7 +14,7 @@ public class BinarySearchTree
     */
     public BinarySearchTree()
     {   
-        
+        this.root = null;
     }
     
     /**
@@ -21,7 +23,19 @@ public class BinarySearchTree
     */
     public void add(Comparable obj) 
     {   
-        
+        Node newNode = new Node();
+        newNode.data = obj;
+        newNode.left = null;
+        newNode.right = null;
+
+        if(this.root == null)
+        {
+            this.root = newNode;
+        }
+        else
+        {
+            this.root.addNode(newNode);
+        }
     }
 
     /**
@@ -31,6 +45,25 @@ public class BinarySearchTree
     */
     public boolean find(Comparable obj)
     {
+        Node current = this.root;
+
+        while(current != null)
+        {
+            int diff = obj.compareTo(current.data);
+            if(diff == 0)
+            {
+                return true;
+            }
+            else if(diff < 0)
+            {
+                current = current.left;
+            }
+            else
+            {
+                current = current.right;
+            }
+        }
+
         return false;
     }
     
@@ -41,7 +74,52 @@ public class BinarySearchTree
     */
     public void remove(Comparable obj)
     {
-        
+        Node toBeRemoved = this.root;
+        Node parent = null;
+        boolean found = false;
+
+        while(!found && toBeRemoved != null)
+        {
+            int diff = obj.compareTo(toBeRemoved.data);
+            if(diff == 0)
+            {
+                found = true;
+            }
+            else
+            {
+                parent = toBeRemoved;
+                if(diff < 0)
+                {
+                    toBeRemoved = toBeRemoved.left;
+                }
+                else
+                {
+                    toBeRemoved = toBeRemoved.right;
+                }
+            }
+        }
+
+        if(!found)
+        {
+            return;
+        }
+
+        // Case 1
+        if(toBeRemoved.left == null && toBeRemoved.right == null)
+        {
+            if(parent == null)
+            {
+                this.root = null;
+            }
+            else if(parent.left == toBeRemoved)
+            {
+                parent.left = null;
+            }
+            else
+            {
+                parent.right = null;
+            }
+        }
     }
     
     /**
@@ -67,7 +145,9 @@ public class BinarySearchTree
     */
     static class Node
     {   
-        
+        public Comparable data;
+        public Node left;
+        public Node right;
 
         /**
             Inserts a new node as a descendant of this node.
@@ -75,7 +155,29 @@ public class BinarySearchTree
         */
         public void addNode(Node newNode)
         {   
-            
+            int diff = newNode.data.compareTo(data);
+            if(diff < 0)
+            {
+                if(left == null)
+                {
+                    left = newNode;
+                }
+                else
+                {
+                    left.addNode(newNode);
+                }
+            }
+            else if(diff > 0)
+            {
+                if(right == null)
+                {
+                    right = newNode;
+                }
+                else
+                {
+                    right.addNode(newNode);
+                }
+            }
         }
     }
 }
