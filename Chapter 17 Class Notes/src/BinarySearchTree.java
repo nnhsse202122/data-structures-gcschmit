@@ -104,21 +104,34 @@ public class BinarySearchTree
             return;
         }
 
-        // Case 1
-        if(toBeRemoved.left == null && toBeRemoved.right == null)
+        // Case 1 & 2
+        if(toBeRemoved.left == null || toBeRemoved.right == null)
         {
-            if(parent == null)
+            Node newChild;
+
+            if(toBeRemoved.left == null)
             {
-                this.root = null;
-            }
-            else if(parent.left == toBeRemoved)
-            {
-                parent.left = null;
+                newChild = toBeRemoved.right;
             }
             else
             {
-                parent.right = null;
+                newChild = toBeRemoved.left;
             }
+
+            if(parent == null)
+            {
+                this.root = newChild;
+            }
+            else if(parent.left == toBeRemoved)
+            {
+                parent.left = newChild;
+            }
+            else
+            {
+                parent.right = newChild;
+            }
+
+            return;
         }
     }
     
