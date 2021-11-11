@@ -133,7 +133,31 @@ public class BinarySearchTree
             return;
         }
 
+        // neither subtree of the node to be removed is empty (Case 3)
 
+        // find the least element of the right subtree
+        Node leastParent = toBeRemoved;
+        Node least = toBeRemoved.right;
+        while(least.left != null)
+        {
+            leastParent = least;
+            least = least.left;
+        }
+
+        // least refers to the least child in the right subtree
+
+        // move the data
+        toBeRemoved.data = least.data;
+
+        // unlink the least child
+        if(leastParent == toBeRemoved)
+        {
+            leastParent.right = least.right;
+        }
+        else
+        {
+            leastParent.left = least.right;
+        }
     }
     
     /**
@@ -141,7 +165,8 @@ public class BinarySearchTree
     */
     public void print()
     {   
-        
+        print(this.root);
+        System.out.println();
     }   
 
     /**
@@ -150,7 +175,14 @@ public class BinarySearchTree
     */
     private static void print(Node parent)
     {   
-        
+        if(parent == null)
+        {
+            return;
+        }
+
+        print(parent.left);
+        System.out.print(parent.data + " ");
+        print(parent.right);
     }
 
     /**
