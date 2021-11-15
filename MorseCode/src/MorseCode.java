@@ -14,6 +14,7 @@ public class MorseCode
     public static void main(String[] args)
     {
         MorseCode.start();  
+        System.out.println(MorseCode.encode("Watson come here"));
         BTreePrinter.printNode(decodeTree);
     }
 
@@ -70,8 +71,9 @@ public class MorseCode
      */
     private static void addSymbol(char letter, String code)
     {
-        _______________________________________
-        ...
+        /*
+            !!! INSERT CODE HERE
+        */
     }
 
     /**
@@ -83,8 +85,9 @@ public class MorseCode
      */
     private static void treeInsert(char letter, String code)
     {
-        _______________________________________
-        ...
+        /*
+            !!! INSERT CODE HERE
+        */
     }
 
     /**
@@ -97,8 +100,9 @@ public class MorseCode
     {
         StringBuffer morse = new StringBuffer(400);
 
-        _______________________________________
-        ...
+        /*
+            !!! INSERT CODE HERE
+        */
 
         return morse.toString();
     }
@@ -113,8 +117,9 @@ public class MorseCode
     {
         StringBuffer text = new StringBuffer(100);
 
-        _______________________________________
-        ...
+        /*
+            !!! INSERT CODE HERE
+        */
 
         return text.toString();
     }
